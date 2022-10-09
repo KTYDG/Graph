@@ -1,16 +1,15 @@
-use graph::{family::Family, graph_func::*, list::List, search::*};
+use graph::{graph_func::*, list::List, search::*};
 
 fn create_matrix(start: usize, end: usize, graph: String) -> bool {
     let graph = fill_graph(graph);
-    let mut counter: i64 = 0;
+    let mut path: Vec<(usize, usize)> = Vec::new();
     depth_search_rec(
         &graph,
         &mut List::new(),
-        &mut Family::new(),
-        start,
+        &mut path,
         end,
         start,
-        &mut counter,
+        -1,
     )
 }
 
