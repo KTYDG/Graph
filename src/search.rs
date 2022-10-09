@@ -1,4 +1,3 @@
-use crate::family::*;
 use crate::list::List;
 
 pub fn depth_search(graph: &Vec<Vec<u8>>, start: usize, end: usize) -> bool {
@@ -32,26 +31,22 @@ pub fn depth_search(graph: &Vec<Vec<u8>>, start: usize, end: usize) -> bool {
 pub fn depth_search_rec(
     graph: &Vec<Vec<u8>>,
     closed: &mut List,
-    path: &mut Family,
-    start: usize,
+    path: &mut Vec<(usize, usize)>,
     end: usize,
     i: usize, // Узел на котором находится текущая рекурсия
-    counter: &mut i64,
+    counter: i64,
 ) -> bool {
+    let counter = counter + 1;
     if i == end {
-        path.push(end);
+        print!("сделано {} шагов, {}", counter, create_path(path.to_vec()));
         return true;
     }
 
     closed.push_back(i.clone());
     for (node, exist) in graph[i].iter().enumerate() {
         if *exist > 0 && !closed.exist(node) {
-            if depth_search_rec(graph, closed, path, start, end, node, counter) {
-                *counter += 1;
-                path.push(i);
-                if i == start {
-                    print!("сделано {} шагов, {}", counter, path.path(true));
-                }
+            path.push((i, node));
+            if depth_search_rec(graph, closed, path, end, node, counter) {
                 return true;
             }
         }

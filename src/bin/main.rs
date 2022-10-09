@@ -1,5 +1,5 @@
 use {
-    graph::{family::*, graph_func::*, list::*, search::*},
+    graph::{graph_func::*, list::*, search::*},
     std::{
         env,
         fs::{self},
@@ -29,15 +29,14 @@ fn main() {
     }
 
     print!("\nПоиск в глубину, рекурсия: ");
-    let mut counter: i64 = 0;
+    let mut path: Vec<(usize, usize)> = Vec::new();
     if depth_search_rec(
         &graph,
         &mut List::new(),
-        &mut Family::new(),
-        start,
+        &mut path,
         end,
         start,
-        &mut counter,
+        -1,
     ) {
         print!(" путь найден");
     } else {
