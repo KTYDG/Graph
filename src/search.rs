@@ -29,12 +29,12 @@ pub fn depth_search(graph: &Vec<Vec<u8>>, start: usize, end: usize) -> bool {
 }
 
 pub fn depth_search_rec(
-    graph: &Vec<Vec<u8>>,
-    closed: &mut List,
-    path: &mut Vec<(usize, usize)>,
-    end: usize,
-    i: usize, // Узел на котором находится текущая рекурсия
-    counter: i64,
+    graph: &Vec<Vec<u8>>, // Сам граф - матрица
+    closed: &mut List,  // Пройденные узлы
+    path: &mut Vec<(usize, usize)>, // вектор, который в который записывается путь от старта к концу
+    end: usize, // конечная вершина, на которую надо
+    i: usize, // Узел на котором находится текущая рекурсия, с самого начала равна стартовой вершине
+    counter: i64,  // Счетчик шагов
 ) -> bool {
     let counter = counter + 1;
     if i == end {
